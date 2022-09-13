@@ -17,11 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from users import views as v
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('projects.urls')),
     path('register/', include('users.urls')),
+    path('developers/', v.developers, name='developers'),
     path('', include('django.contrib.auth.urls')),
 ]
 
