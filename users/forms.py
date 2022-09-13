@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 class RegisterForm(UserCreationForm):
     email = forms.EmailField()
     github_link = forms.CharField()
+    title = forms.CharField(max_length=200)
+    bio = forms.CharField()
     # website_link = forms.URLField()
     # instagram_link = forms.URLField(null=True, blank=True)
     # twitter_link = forms.URLField(null=True, blank=True)

@@ -90,6 +90,41 @@
         </div>
         </div>
         </section>
+
+
+        <div class="pagination">
+          <ul class="container">
+            {% if projects.has_previous %}
+            <li><a href="?page={{ projects.previous_page_number }}" class="btn">&#10094; Prev</a></li>
+            {% else %}
+            <li><a href="#" tabindex="-1" class="btn btn--disabled">&#10094; Prev</a></li>
+            {% endif %}
+    
+            {% if projects.number|add:'-4' > 1 %}
+            <li><a href="?page={{ projects.number|add:'-5' }}" class="btn btn--disabled">&hellip;</a></li>
+            {% endif %}
+    
+            {% for i in projects.paginator.page_range %}
+            {% if projects.number == i %}
+            <li><a href="#" class="btn btn--sub">{{i}}</a></li>
+            {% elif i > projects.number|add:'-5' and i < projects.number|add:'5' %}
+            <li><a href="?page={{ i }}" class="btn">{{i}}</a></li>
+            {% endif %}
+            {% endfor %}
+    
+            {% if projects.paginator.num_pages > projects.number|add:'4' %}
+            <li><a href="?page={{ projects.number|add:'5' }}" class="btn">&hellip;</a></li>
+            {% endif %}
+    
+            {% if projects.has_next %}
+            <li><a href="?page={{ projects.next_page_number }}" class="btn">Next &#10095;</a></li>
+            {% else %}
+            <li><a href="#" class="btn">Next &#10095;</a></li>
+            {% endif %}
+          </ul>
+        </div>
+
+
     </main>
 
 

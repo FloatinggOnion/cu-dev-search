@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Project
 from .forms import ProjectForm
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -9,8 +10,12 @@ def projects(request):
     projects = Project.objects.all()
     print('PROJECT:', projects)
 
+    paginator = Paginator(projects, 6)
+    page_number = request.GET.get('page')
+    page_object = paginator.get_page(page_number)
+
     context = {
-        'projects':projects,
+        'projects': page_object,
     }
     return render(request, 'projects/projects.html', context) 
 
